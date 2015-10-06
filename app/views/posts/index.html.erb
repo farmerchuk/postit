@@ -1,8 +1,9 @@
 <%= render "/shared/content_title", title: "All Posts" %>
 
 <% @posts.each do |post| %>
-  <div class='row'>
-    <div class='span8 well'>
+  <!-- <div class='row'> -->
+    <div class='well'>  <!-- removed span8 -->
+      <%= render "/shared/edit_button", post: post %>
       <%= render post.categories %>
       <h4 class><%= link_to post.title, post.url %></h4>
       <p><%= post.description %></p>
@@ -11,5 +12,5 @@
       </p>
       <small><%= link_to "#{post.comments.size} Comments", post_path(post) %></small>
     </div>
-  </div>
+  <!-- </div> -->
 <% end %>
