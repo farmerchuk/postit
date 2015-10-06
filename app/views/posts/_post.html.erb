@@ -1,0 +1,12 @@
+<!-- <div class='row'> -->
+  <div class='well'>  <!-- removed span8 -->
+    <%= render "/shared/edit_button", post: post %>
+    <%= render post.categories %>
+    <h4 class><%= link_to post.title, post.url %></h4>
+    <p><%= post.description %></p>
+    <p class='quiet'>
+      <small><span>Posted by: <%= post.creator.username %> at <%= post.created_at %></span></small>
+    </p>
+    <small><%= link_to "#{post.comments.size} Comments", post_path(post) %></small>
+  </div>
+<!-- </div> -->
