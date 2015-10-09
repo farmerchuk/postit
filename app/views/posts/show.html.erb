@@ -1,12 +1,31 @@
 <%= render "/shared/edit_button", post: @post %>
-
-<p>
-  <%= render @post.categories %>
-<p>
-
-<%= render "/shared/content_title", title: @post.title %>
-
-<p>
-  <%= @post.description %>
-</p>
+<p><%= render @post.categories %><p>
+<p class="lead"><%= link_to @post.title, fix_url(@post.url) %></p>
 <hr/>
+<p><%= @post.description %></p>
+
+<hr/>
+
+<%= form_for [@post, @comment] do |f| %>
+  <%= render "/shared/errors", obj: @comment %>
+  <div class="control-group">
+    <%= f.label :body, "Leave a comment below..." %>
+    <%= f.text_area :body, rows: 5, class: "span8" %>
+  </div>
+  <%= f.submit "Create Comment", class: "btn btn-primary" %>
+<% end %>
+
+<br/>
+
+
+<h5>Previous comments:</h5>
+<div class="row">
+  <% @post.comments.each do |comment| %>
+    <div class="well span6">
+      <p>
+        <em>"<%= comment.body %>"</em>
+      </p>
+      <%= render "/shared/author_date_time", obj: comment %>
+    </div>
+  <% end %>
+</div>
