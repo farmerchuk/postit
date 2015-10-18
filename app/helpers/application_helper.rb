@@ -4,6 +4,6 @@ module ApplicationHelper
   end
 
   def format_date_time(time_obj)
-    time_obj.strftime("%c")
+    time_obj.strftime("%m/%d/%Y at %I:%M%p")
   end
 end

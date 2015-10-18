@@ -6,26 +6,19 @@
 
 <hr/>
 
-<%= form_for [@post, @comment] do |f| %>
-  <%= render "/shared/errors", obj: @comment %>
-  <div class="control-group">
-    <%= f.label :body, "Leave a comment below..." %>
-    <%= f.text_area :body, rows: 5, class: "span8" %>
-  </div>
-  <%= f.submit "Create Comment", class: "btn btn-primary" %>
+<% if logged_in? %>
+  <%= form_for [@post, @comment] do |f| %>
+    <%= render "/shared/errors", obj: @comment %>
+    <div class="control-group">
+      <%= f.label :body, "Leave a comment below..." %>
+      <%= f.text_area :body, rows: 5, class: "span6" %>
+    </div>
+    <%= f.submit "Create Comment", class: "btn btn-primary" %>
+  <% end %>
 <% end %>
 
 <br/>
 
-
 <h5>Previous comments:</h5>
-<div class="row">
-  <% @post.comments.each do |comment| %>
-    <div class="well span6">
-      <p>
-        <em>"<%= comment.body %>"</em>
-      </p>
-      <%= render "/shared/author_date_time", obj: comment %>
-    </div>
-  <% end %>
-</div>
+
+<%= render "comments/comments", obj: @post %>

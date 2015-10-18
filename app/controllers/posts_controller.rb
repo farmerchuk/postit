@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update]
 
   def index
     @posts = Post.all
@@ -15,7 +17,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.creator = User.first  # change once authentication implemented
+    @post.creator = current_user
 
     if @post.save
       flash[:notice] = "Your post was successfully created!"
@@ -44,5 +46,11 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def require_same_user
+    if current_user != @post.creator
+      redirect_to post_path(@post)
+    end
   end
 end

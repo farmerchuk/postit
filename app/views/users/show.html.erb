@@ -1,0 +1,30 @@
+<%= render "/shared/content_title", title: "Profile for: #{@user.username}" %>
+
+<div class="well">
+  <P>
+    <h5>Username:</h5>
+    <%= @user.username %>
+  </p>
+  <hr/>
+  <p>
+    <h5>Account Created:</h5>
+    <%= format_date_time @user.created_at %>
+  </p>
+</div>
+
+<ul class="nav nav-tabs">
+  <li class="<%= 'active' if params[:tab].nil? %>">
+    <%= link_to "Previous Posts (#{@user.posts.count})", user_path(@user)%>
+  </li>
+  <li class="<%= 'active' if params[:tab] == 'comments' %>">
+    <%= link_to "Previous Comments (#{@user.comments.count})", user_path(@user, tab: "comments") %>
+  </li>
+</ul>
+
+<% if params[:tab] == "comments" %>
+  <%= render "comments/comments", obj: @user, show_post_link: true %>
+<% else %>
+  <% @user.posts.reverse_each do |post| %>
+    <%= render "posts/post", post: post %>
+  <% end %>
+<% end %>
