@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:index, :show]
   before_action :require_same_user, only: [:edit, :update]
 
@@ -36,6 +36,19 @@ class PostsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def vote
+    @vote = Vote.where(creator: current_user, voteable: @post).first  # get the users existing vote (if exists)
+
+    if @vote  # if user has already vote on this object, update existing vote
+      @vote.update(vote: params[:vote], creator: current_user, voteable: @post)
+    else  # create new vote if no existing vote
+      @vote = Vote.create(vote: params[:vote], creator: current_user, voteable: @post)
+    end
+
+    flash[:notice] = "Your vote was registered!"
+    redirect_to :back
   end
 
   private

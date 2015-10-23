@@ -1,18 +1,27 @@
 <% show_post_link ||= false %>
 
 <div class="row">
-  <% obj.comments.reverse_each do |comment| %>
-    <div class="well span8">
-      <p>
-        <em>"<%= comment.body %>"</em>
-      </p>
-      <small class="quiet">
-        Posted by: <%= link_to comment.creator.username, user_path(comment.creator) %>
-        on <%= format_date_time(comment.created_at) %>
-        <% if show_post_link %>
-          <span class="pull-right">Related post: <%= link_to comment.post.title, post_path(comment.post) %></span>
-        <% end %>
-      </small>
+  <div class="well span0 text-center">
+      <%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: "post" do %>
+        <i class="icon-chevron-up"></i>
+      <% end %>
+    <div>
+      <%= comment.total_votes %> votes
     </div>
-  <% end %>
+      <%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: "post" do %>
+      <i class="icon-chevron-down"></i>
+      <% end %>
+  </div>
+  <div class="well span8">
+    <p>
+      <em>"<%= comment.body %>"</em>
+    </p>
+    <small class="quiet">
+      Posted by: <%= link_to comment.creator.username, user_path(comment.creator) %>
+      on <%= format_date_time(comment.created_at) %>
+      <% if show_post_link %>
+        <span class="pull-right">Related post: <%= link_to comment.post.title, post_path(comment.post) %></span>
+      <% end %>
+    </small>
+  </div>
 </div>

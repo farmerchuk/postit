@@ -22,9 +22,11 @@
 </ul>
 
 <% if params[:tab] == "comments" %>
-  <%= render "comments/comments", obj: @user, show_post_link: true %>
+  <% sort_comments_by_total_votes(@user.comments).each do |comment| %>
+    <%= render "comments/comments", comment: comment, show_post_link: true %>
+  <% end %>
 <% else %>
-  <% @user.posts.reverse_each do |post| %>
+  <% sort_posts_by_total_votes(@user.posts).each do |post| %>
     <%= render "posts/post", post: post %>
   <% end %>
 <% end %>

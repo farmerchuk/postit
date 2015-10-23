@@ -21,4 +21,6 @@
 
 <h5>Previous comments:</h5>
 
-<%= render "comments/comments", obj: @post %>
+<% @post.comments.reverse_each do |comment| %>
+  <%= render "comments/comments", comment: comment %>
+<% end %>

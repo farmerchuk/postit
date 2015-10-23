@@ -1,5 +1,5 @@
 <%= render "/shared/content_title", title: "All Posts" %>
 
-<% @posts.reverse_each do |post| %>
+<% sort_posts_by_total_votes(@posts).each do |post| %>
   <%= render "post", post: post %>
 <% end %>
