@@ -1,13 +1,17 @@
 <div class="row">
   <div class="well span0 text-center">
-      <%= link_to vote_post_path(post, vote: true), method: "post" do %>
-        <i class="icon-chevron-up"></i>
+      <% if logged_in? %>
+        <%= link_to vote_post_path(post, vote: true), method: "post" do %>
+          <i class="icon-chevron-up"></i>
+        <% end %>
       <% end %>
     <div>
       <%= post.total_votes %> votes
     </div>
-      <%= link_to vote_post_path(post, vote: false), method: "post" do %>
-      <i class="icon-chevron-down"></i>
+      <% if logged_in? %>
+        <%= link_to vote_post_path(post, vote: false), method: "post" do %>
+        <i class="icon-chevron-down"></i>
+        <% end %>
       <% end %>
   </div>
   <div class='well span8'>
