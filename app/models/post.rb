@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   has_many :categories, through: :post_categories
   has_many :votes, as: :voteable  # looks for foreign key in voteable columns, not votes_id
 
-  validates :title, presence: true, length: {minimum: 5}
+  validates :title, presence: true, length: {minimum: 2}
   validates :url, presence: true, uniqueness: true
   validates :description, presence: true
 
