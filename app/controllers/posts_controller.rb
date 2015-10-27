@@ -39,7 +39,7 @@ class PostsController < ApplicationController
   end
 
   def vote
-    vote = Vote.where(creator: current_user, voteable: @post).first  # get the users existing vote (if exists)
+    vote = Vote.find_by(creator: current_user, voteable: @post)  # get the users existing vote (if exists)
 
     if vote  # if user has already vote on this object, update existing vote
       vote.update(vote: params[:vote], creator: current_user, voteable: @post)
