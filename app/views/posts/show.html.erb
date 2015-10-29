@@ -21,6 +21,6 @@
 
 <h5>Previous comments:</h5>
 
-<% @post.comments.reverse_each do |comment| %>
+<% sort_comments_by_total_votes(@post.comments).each do |comment| %>
   <%= render "comments/comments", comment: comment %>
 <% end %>

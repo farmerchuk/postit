@@ -43,13 +43,16 @@ class PostsController < ApplicationController
 
     if vote  # if user has already vote on this object, update existing vote
       vote.update(vote: params[:vote], creator: current_user, voteable: @post)
-      flash[:notice] = "Your previous vote was updated!"
+      @message_text = "Vote updated!"
     else  # create new vote if no existing vote
       vote = Vote.create(vote: params[:vote], creator: current_user, voteable: @post)
-      flash[:notice] = "Your vote was registered!"
+      @message_text = "Vote received!"
     end
 
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+    end
   end
 
   private

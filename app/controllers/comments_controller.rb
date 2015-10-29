@@ -16,17 +16,20 @@ class CommentsController < ApplicationController
   end
 
   def vote
-    comment = Comment.find(params[:id])
-    vote = Vote.find_by(creator: current_user, voteable: comment)  # get the users existing vote (if exists)
+    @comment = Comment.find(params[:id])
+    @vote = Vote.find_by(creator: current_user, voteable: @comment)  # get the users existing vote (if exists)
 
-    if vote  # if user has already vote on this object, update existing vote
-      vote.update(vote: params[:vote], creator: current_user, voteable: comment)
-      flash[:notice] = "Your previous vote was updated!"
+    if @vote  # if user has already vote on this object, update existing vote
+      @vote.update(vote: params[:vote], creator: current_user, voteable: @comment)
+      @message_text = "Vote updated!"
     else  # create new vote if no existing vote
-      vote = Vote.create(vote: params[:vote], creator: current_user, voteable: comment)
-      flash[:notice] = "Your vote was registered!"
+      @vote = Vote.create(vote: params[:vote], creator: current_user, voteable: @comment)
+      @message_text = "Vote received!"
     end
 
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+    end
   end
 end

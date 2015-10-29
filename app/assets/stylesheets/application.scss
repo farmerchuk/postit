@@ -41,3 +41,14 @@ div.nav_item {
 div.comment_votes {
   padding: 10px;
 }
+
+#js_vote_message {
+  text-align: center;
+  width: 30%;
+  position: fixed;
+  top: 58px;
+  left: 35%;
+  right: 35%;
+  opacity: .8;
+  display: none;
+}
