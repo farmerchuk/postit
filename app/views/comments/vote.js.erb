@@ -3,5 +3,4 @@ $("#comment_<%= @comment.id %>_votes").html("<%= @comment.total_votes %> votes")
 // display confirmation then fade out
 $("#js_vote_message span").html("<%= @message_text %>");
 document.getElementById("js_vote_message").style.display = "block";
-$("#js_vote_message").fadeOut(3200)
-document.getElementById("js_vote_message").style.display = "none".delay(3200);
+$("#js_vote_message").fadeOut(3200);

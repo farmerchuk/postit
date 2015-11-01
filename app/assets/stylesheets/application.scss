@@ -15,7 +15,14 @@
  @import "bootstrap";
 
  .container {
-  margin-left: 135px
+  margin: 0 auto 0 auto;
+}
+
+#all_nav_btns {
+  padding-top: 10px;
+  height: 50px;
+  float: right;
+  margin: auto;
 }
 
 .navbar .nav > li > a.brand {
@@ -42,12 +49,35 @@ div.comment_votes {
   padding: 10px;
 }
 
+.alert {
+  text-align: center;
+  width: 30%;
+  position: fixed;
+  top: 80px;
+  left: 35%;
+  right: 35%;
+}
+
 #js_vote_message {
   text-align: center;
   width: 30%;
   position: fixed;
-  top: 58px;
+  top: 80px;
   left: 35%;
   right: 35%;
   display: none;
+}
+
+#navbar_all {
+  width: 940px;
+  margin: 0 auto 0 auto;
+}
+
+#logo_text {
+  vertical-align: middle;
+}
+
+#logo {
+  padding-left: 0;
+  text-decoration: none;
 }

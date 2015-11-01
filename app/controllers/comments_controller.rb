@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :require_user
 
   def create
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by(slug: params[:post_id])
     @comment = @post.comments.new(params.require(:comment).permit(:body))
     @comment.creator = current_user
 
@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
   end
 
   def vote
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find_by(slug: params[:id])
     @vote = Vote.find_by(creator: current_user, voteable: @comment)  # get the users existing vote (if exists)
 
     if @vote  # if user has already vote on this object, update existing vote

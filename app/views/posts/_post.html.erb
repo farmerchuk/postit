@@ -14,10 +14,10 @@
         <% end %>
       <% end %>
   </div>
-  <div class='well span8'>
+  <div class='well span10'>
     <%= render "/shared/edit_button", post: post %>
     <%= render post.categories %>
-    <h4><%= link_to post.title, fix_url(post.url) %></h4>
+    <h4><%= link_to post.title, post_path(post) %></h4>
     <p><%= post.description %></p>
     <p class="quiet"><small>
       Posted by: <%= link_to post.creator.username, user_path(post.creator) %>
