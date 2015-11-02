@@ -5,9 +5,9 @@ class Comment < ActiveRecord::Base
 
   validates :body, presence: true
 
-  before_save :generate_slug
+  before_save :generate_slug!
 
-  def generate_slug
+  def generate_slug!
     self.slug = DateTime.now.to_s.gsub(/[^0-9a-z ]/i, '').gsub(" ", "-").downcase[0,15]
   end
 
