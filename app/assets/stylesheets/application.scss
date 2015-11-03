@@ -67,6 +67,15 @@ div.comment_votes {
   display: none;
 }
 
+.alert-message {
+  text-align: center;
+  width: 30%;
+  position: fixed;
+  top: 80px;
+  left: 35%;
+  right: 35%;
+}
+
 #navbar_all {
   width: 940px;
   margin: 0 auto 0 auto;
