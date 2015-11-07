@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
   end
 
   def vote
-    @comment = Comment.find_by(slug: params[:id])
+    @comment = Comment.find(params[:id])
     @vote = Vote.find_by(creator: current_user, voteable: @comment)  # get the users existing vote (if exists)
 
     if @vote  # if user has already vote on this object, update existing vote
