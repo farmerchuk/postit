@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :time_zone)
   end
 
   def set_user
@@ -43,8 +43,6 @@ class UsersController < ApplicationController
   end
 
   def require_same_user
-    if current_user != @user
-      redirect_to user_path(@user)
-    end
+    access_denied unless logged_in? && current_user == @user
   end
 end

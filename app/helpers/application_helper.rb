@@ -4,7 +4,10 @@ module ApplicationHelper
   end
 
   def format_date_time(time_obj)
-    time_obj.strftime("%m/%d/%Y at %I:%M%p")
+    if logged_in? && !current_user.time_zone.blank?
+      time_obj = time_obj.in_time_zone(current_user.time_zone)
+    end
+    time_obj.strftime("%m/%d/%Y at %I:%M%p %Z")
   end
 
   def sort_posts_by_total_votes(posts)

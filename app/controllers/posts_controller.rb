@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:index, :show]
-  before_action :require_same_user, only: [:edit, :update]
+  before_action :require_same_user_or_admin, only: [:edit, :update]
 
   def index
     @posts = Post.all
@@ -66,8 +66,10 @@ class PostsController < ApplicationController
   end
 
   def require_same_user
-    if current_user != @post.creator
-      redirect_to post_path(@post)
-    end
+    access_denied unless logged_in? && current_user == @post.creator
+  end
+
+  def require_same_user_or_admin
+    access_denied unless logged_in? && (current_user == @post.creator || logged_in? && current_user.admin?)
   end
 end

@@ -10,6 +10,11 @@
     <h5>Account Created:</h5>
     <%= format_date_time @user.created_at %>
   </p>
+  <hr/>
+  <p>
+    <h5>Time zone:</h5>
+    <%= @user.time_zone || Time.zone.name %>
+  </p>
 </div>
 
 <ul class="nav nav-tabs">
