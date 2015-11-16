@@ -6,10 +6,13 @@ class PostsController < ApplicationController
   before_action :require_same_user_or_admin, only: [:edit, :update]
 
   def index
-    posts = Post.all.sort_by { |obj| obj.total_votes }.reverse
-    @pages = (posts.size.to_f / POSTS_PER_PAGE).ceil
-    @current_page = (params[:offset].to_i / POSTS_PER_PAGE) + 1
-    @posts = posts[params[:offset].to_i, POSTS_PER_PAGE]
+    @posts = Post.all
+    if @posts
+      @posts.all.sort_by { |obj| obj.total_votes }.reverse
+      @pages = (@posts.size.to_f / POSTS_PER_PAGE).ceil
+      @current_page = (params[:offset].to_i / POSTS_PER_PAGE) + 1
+      @posts = @posts[params[:offset].to_i, POSTS_PER_PAGE]
+    end
   end
 
   def show
