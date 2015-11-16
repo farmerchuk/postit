@@ -1,6 +1,24 @@
 <%= render "/shared/content_title", title: "All Posts" %>
 
-<% sort_posts_by_total_votes(@posts).each do |post| %>
+<% @posts.each do |post| %>
   <%= %>
   <%= render "post", post: post %>
 <% end %>
+
+<hr/>
+
+<div class="button_group_wrap">
+  <div class="btn-group btn_group_center">
+    <% @pages.times do |n| %>
+      <% if @current_page == n + 1 %>
+        <span class="btn quiet">
+          <%= "Page #{n + 1}" %>
+        </span>
+      <% else %>
+        <span class="btn">
+          <%= link_to "Page #{n + 1}", posts_path(offset: n * PostsController::POSTS_PER_PAGE) %>
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+</div>

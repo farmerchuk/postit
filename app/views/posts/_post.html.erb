@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="well span0 text-center">
+  <div class="well span1 text-center">
       <% if logged_in? %>
         <%= link_to vote_post_path(post, vote: true), method: "post", remote: true do %>
           <i class="icon-chevron-up"></i>
@@ -14,7 +14,8 @@
         <% end %>
       <% end %>
   </div>
-  <div class='well span10'>
+
+  <div class='well span9'>
     <%= render "/shared/edit_button", post: post %>
     <%= render post.categories %>
     <h4><%= link_to post.title, post_path(post) %></h4>

@@ -12,6 +12,16 @@
   </p>
   <hr/>
   <p>
+    <h5>Phone Number:</h5>
+    <%= @user.phone_number ? format_phone_number(@user.phone_number) : "No phone number provided." %>
+  </p>
+  <hr/>
+  <p>
+    <h5>Two-factor Authentication?</h5>
+    <%= @user.two_factor ? "Enabled" : "Disabled" %>
+  </p>
+  <hr/>
+  <p>
     <h5>Time zone:</h5>
     <%= @user.time_zone || Time.zone.name %>
   </p>
@@ -27,11 +37,11 @@
 </ul>
 
 <% if params[:tab] == "comments" %>
-  <% sort_comments_by_total_votes(@user.comments).each do |comment| %>
+  <% sort_by_total_votes(@user.comments).each do |comment| %>
     <%= render "comments/comments", comment: comment, show_post_link: true %>
   <% end %>
 <% else %>
-  <% sort_posts_by_total_votes(@user.posts).each do |post| %>
+  <% sort_by_total_votes(@user.posts).each do |post| %>
     <%= render "posts/post", post: post %>
   <% end %>
 <% end %>

@@ -11,11 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108220108) do
+ActiveRecord::Schema.define(version: 20151116033018) do
 
   create_table "categories", force: true do |t|
-    t.string "name"
-    t.string "slug"
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "comments", force: true do |t|
@@ -27,8 +29,10 @@ ActiveRecord::Schema.define(version: 20151108220108) do
   end
 
   create_table "post_categories", force: true do |t|
-    t.integer "post_id"
-    t.integer "category_id"
+    t.integer  "post_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "posts", force: true do |t|
@@ -49,6 +53,9 @@ ActiveRecord::Schema.define(version: 20151108220108) do
     t.string   "slug"
     t.string   "role"
     t.string   "time_zone"
+    t.string   "phone_number"
+    t.string   "pin"
+    t.boolean  "two_factor"
   end
 
   create_table "votes", force: true do |t|

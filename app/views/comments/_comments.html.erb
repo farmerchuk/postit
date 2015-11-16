@@ -1,7 +1,7 @@
 <% show_post_link ||= false %>
 
 <div class="row">
-  <div class="well span0 text-center">
+  <div class="well span1 text-center">
       <% if logged_in? %>
         <%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: "post", remote: true do %>
           <i class="icon-chevron-up"></i>
@@ -16,7 +16,8 @@
         <% end %>
       <% end %>
   </div>
-  <div class="well span10">
+
+  <div class="well span9">
     <p>
       <em>"<%= comment.body %>"</em>
     </p>

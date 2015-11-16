@@ -9,7 +9,19 @@
       <%= f.password_field :password %>
     </div>
     <div class="control-group">
-      <%= f.label :time_zone %>
+      <%= f.label :phone_number, "Phone Number" %>
+      <%= f.text_field :phone_number, placeholder: "10 digits, numbers only"%></br>
+    </div>
+    <div class="control-group">
+      <%= f.label :two_factor, "Enable two-factor authentication?" %>
+      <span class="quiet">
+        When logging in, a secret pin number will be sent via text to your phone number.
+      </span></br>
+      <%= f.check_box :two_factor %>
+    </div>
+    </br>
+    <div class="control-group">
+      <%= f.label :time_zone, "Time-zone" %>
       <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, default: Time.zone.name %>
     </div>
     <%= f.submit (@user.new_record? ? "Create Account" : "Submit Changes"), class: "btn btn-success" %>

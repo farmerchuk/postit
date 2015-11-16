@@ -1,10 +1,15 @@
 class PostsController < ApplicationController
+  POSTS_PER_PAGE = 5
+
   before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:index, :show]
   before_action :require_same_user_or_admin, only: [:edit, :update]
 
   def index
-    @posts = Post.all
+    posts = Post.all.sort_by { |obj| obj.total_votes }.reverse
+    @pages = (posts.size.to_f / POSTS_PER_PAGE).ceil
+    @current_page = (params[:offset].to_i / POSTS_PER_PAGE) + 1
+    @posts = posts[params[:offset].to_i, POSTS_PER_PAGE]
   end
 
   def show

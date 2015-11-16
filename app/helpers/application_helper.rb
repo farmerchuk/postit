@@ -10,11 +10,15 @@ module ApplicationHelper
     time_obj.strftime("%m/%d/%Y at %I:%M%p %Z")
   end
 
-  def sort_posts_by_total_votes(posts)
-    posts.sort_by { |post| post.total_votes }.reverse
+  def format_phone_number(string)
+    "(#{string[0,3]}) #{string[3,3]}-#{string[6,4]}"
   end
 
-  def sort_comments_by_total_votes(comments)
-    comments.sort_by { |comment| comment.total_votes }.reverse
+  def sort_by_total_votes(obj)
+    obj.sort_by { |obj| obj.total_votes }.reverse
+  end
+
+  def sort_by_total_votes(obj)
+    obj.sort_by { |obj| obj.total_votes }.reverse
   end
 end
