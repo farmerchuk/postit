@@ -8,10 +8,10 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     if @posts
-      @posts.all.sort_by { |obj| obj.total_votes }.reverse
+      sorted_posts = @posts.all.sort_by { |post| post.total_votes }.reverse
       @pages = (@posts.size.to_f / POSTS_PER_PAGE).ceil
       @current_page = (params[:offset].to_i / POSTS_PER_PAGE) + 1
-      @posts = @posts[params[:offset].to_i, POSTS_PER_PAGE]
+      @posts = sorted_posts[params[:offset].to_i, POSTS_PER_PAGE]
     end
   end
 
